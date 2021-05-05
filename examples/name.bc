@@ -1,0 +1,10 @@
+[&io.bc]
+
+"Pass your name:" :ln F
+">>> " F :input
+
+$00 A
+"Hello, " :print_mem "!" :ln F
+
+>
+"Length of your name is: " :p_byte F

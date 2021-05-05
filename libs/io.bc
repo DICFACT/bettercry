@@ -1,0 +1,47 @@
+[Special characters]
+[:\n: $0A] [:ln: $0A #]
+[:\t: $0B] [:tab: $0B #] [:stab: $20 # # # #]
+[:\f: $0C]
+[:\r: $0D]
+[:\b: $08]
+[:\0: $00]
+
+[Numeric output]
+[:to_dig: -C -C -C -C]  [Converts char to digit '5' -> 5]
+[:p_dig: +C +C +C +C #]  [Prints digit]
+
+[:p_byte:  [Prints byte]
+	R /A /A G1 $T G2 L :p_dig L
+	R /A %A G1 $T G2 L :p_dig L
+	R    %A :p_dig
+]
+
+[Strings]
+
+[WIP]
+[TODO: Add backspace support]
+[:input:
+	> $00 W
+	L
+		[Getting another char from user and printing it]
+		[both on screen and to memory]
+		< I W # F
+
+		[If current symbol is \r (enter pressed) - breaking loop]
+		:\r =. G1
+
+		[Adding one to our character count]
+		> R +1 > W
+
+	$T B1 L
+
+	[Writing traveling 0 instead of \r to the end of the string]
+	$00 W >
+
+	[Final touch]
+	:ln F
+]
+
+[:print_mem:
+	R L # > R B1
+]

@@ -1,0 +1,47 @@
+[&io.bc]
+
+[Defining a macro]
+[:sign:
+	R =0 ! G1
+		"Rock" G3 L
+	R =1 ! G1
+		"Paper" G2 L
+	R =2 ! G1
+	    "Scissors" L
+]
+
+[Printing a prompt]
+"RPS Game" :ln
+"Input your sign 0-rock, 1-paper and 2-scissors..." :ln F
+
+[Getting input from user]
+^0 W I -. W
+
+?2 GA  [Going 10 labels forward (3 in each 'sign' macro)]
+	[Printing users sign]
+	"Your sign is: " :sign :ln F
+
+	[Generating opponents sign]
+	> N2 W
+
+	[Printing opponents sign]
+	"AIs sign is: " :sign :ln F
+
+	[Calculating the winner]
+	R +3 < -. %3 >> W
+
+	[Printing the winner]
+	R =0 ! G1
+		"Draw!" G3 L
+	R =0 ! G1
+	    "AI win!" G2 L
+	R =0 ! G1
+	    "You win!" L
+	:ln F
+
+	[Finishing the program]
+	$T G2
+L
+	[Error message]
+	"Incorrect sign value, must be only 0, 1 or 2!" :ln F
+L
